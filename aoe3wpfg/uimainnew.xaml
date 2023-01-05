@@ -3094,361 +3094,374 @@
                     <local:Age3Button x:Name="armyBanner_unfurled8" Content="9" />
                 </StackPanel>
 
-                <!--RESOURCES BAR-->
-                <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Margin="50,0,0,0" Width="{Binding ElementName=resourcePanel2, Path=ActualWidth}">
-                    <Control x:Name="resourcePanelBG" Style="{StaticResource Ingame_PanelBGStyle}" Margin="-15,-15,-75,-45" />
+                <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
 
-                    <!--RESOURCE PANEL (Has Native, Asian and Advanced Settings too)-->
-                    <StackPanel x:Name="resourcePanel" Orientation="Horizontal" Visibility="Visible" Margin="0,5,-50,0">
-                        <StackPanel.Resources>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource RegularTextBlockStyle}">
-                                <Setter Property="FontFamily" Value="Trajan Pro" />
-                                <Setter Property="FontWeight" Value="Bold" />
-                                <Setter Property="FontSize" Value="18" />
-                                <Setter Property="Foreground" Value="White" />
-                                <Setter Property="HorizontalAlignment" Value="Left" />
-                                <Setter Property="VerticalAlignment" Value="Center" />
-                                <Setter Property="TextAlignment" Value="Left" />
-                                <Setter Property="Height" Value="auto" />
-                                <Setter Property="Width" Value="auto" />
-                                <Setter Property="Margin" Value="5,2,5,2" />
-                                <Setter Property="Effect">
-                                    <Setter.Value>
-                                        <DropShadowEffect BlurRadius="3" Color="Black" Direction="-90" ShadowDepth="3" RenderingBias="Quality" />
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </StackPanel.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                    </Grid.ColumnDefinitions>
 
-                        <StackPanel x:Name="resourcePanel2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,30,0" Visibility="Visible">
-                            <!--POPS-->
-                            <StackPanel x:Name="resourcePanel_Pops" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,0">
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_pop}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <TextBlock x:Name="minimapPanel_dptotalPopLeft">
-                                        {totalPop}/{popcap}
-                                    <TextBlock.ToolTip>
-                                        $$32714$$Your current population is {totalpop} / You can support a total population of {popcap}.
-                                    </TextBlock.ToolTip>
-                                </TextBlock>
-                            </StackPanel>
-                            <!--ECONOMY MODE: MILITARY POP-->
-                            <StackPanel x:Name="resourcePanel_MilPops" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,0" Visibility="Collapsed">
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="/resources/images/hud/stat_icon_infantry.png"/>
-                                    </Rectangle.Fill>
-                                </Rectangle>
+                    <!--HC BUTTON-->
+                    <Grid Margin="0,-10,10,0" Panel.ZIndex="1" Grid.Column="0" Grid.RowSpan="2">
+                        <!--Flag-->
+                        <local:Age3Button x:Name="uimain_homeCityToggle" Style="{StaticResource HomeCityHUDButton}" Focusable="False" ConsoleCommand="toggleHomeCityView()">
+                            <local:Age3Button.ToolTip>
+                                $$32709$$
+                            </local:Age3Button.ToolTip>
+                        </local:Age3Button>
+                    </Grid>
 
-                                <!--Income-->
-                                <TextBlock x:Name="millitaryPop_text">
-                                        {totalMilPop}/{milpopcap}
-                                    <TextBlock.ToolTip>
-                                        $$55503$$Your current military population is {totalMilPop} / You can support a total population of {milpopcap}.
-                                    </TextBlock.ToolTip>
-                                </TextBlock>
-                            </StackPanel>
+                    <!--RESOURCES BAR-->
+                    <Grid Margin="0,0,0,0" Width="{Binding ElementName=resourcePanel2, Path=ActualWidth}" Panel.ZIndex="0" Grid.Column="1">
+                        <Control x:Name="resourcePanelBG" Style="{StaticResource Ingame_PanelBGStyle}" Margin="-75,-15,-15,-45" />
 
-                            <!--FOOD-->
-                            <StackPanel x:Name="resourcePanel_Food" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
-                                <!--Settler Counter-->
-                                <local:Age3Button x:Name="SettlerCountDialog_foodLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindResourceGatherers(food)">
-                                    <TextBlock x:Name="SettlerCountDialog_food" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-                                {numGatherers(food)}
-                                    </TextBlock>
-                                    <Button.ToolTip>
-                                        $$18397$$Food Gatherers: {numGatherers(food)}
-                                    </Button.ToolTip>
-                                </local:Age3Button>
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_food}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
-                                    <TextBlock x:Name="minimapPanel_dpfood">
-                                    {resource(food)}
-                                        <TextBlock.ToolTip>
+                        <!--RESOURCE PANEL (Has Native, Asian and Advanced Settings too)-->
+                        <StackPanel x:Name="resourcePanel" Orientation="Horizontal" Visibility="Visible" Margin="-50,5,0,0">
+                            <StackPanel.Resources>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource RegularTextBlockStyle}">
+                                    <Setter Property="FontFamily" Value="Trajan Pro" />
+                                    <Setter Property="FontWeight" Value="Bold" />
+                                    <Setter Property="FontSize" Value="18" />
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter Property="HorizontalAlignment" Value="Left" />
+                                    <Setter Property="VerticalAlignment" Value="Center" />
+                                    <Setter Property="TextAlignment" Value="Left" />
+                                    <Setter Property="Height" Value="auto" />
+                                    <Setter Property="Width" Value="auto" />
+                                    <Setter Property="Margin" Value="5,2,5,2" />
+                                    <Setter Property="Effect">
+                                        <Setter.Value>
+                                            <DropShadowEffect BlurRadius="3" Color="Black" Direction="-90" ShadowDepth="3" RenderingBias="Quality" />
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </StackPanel.Resources>
+
+                            <StackPanel x:Name="resourcePanel2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="40,0,30,0" Visibility="Visible">
+                                <!--FOOD-->
+                                <StackPanel x:Name="resourcePanel_Food" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
+                                    <!--Settler Counter-->
+                                    <local:Age3Button x:Name="SettlerCountDialog_foodLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindResourceGatherers(food)">
+                                        <TextBlock x:Name="SettlerCountDialog_food" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+                                    {numGatherers(food)}
+                                        </TextBlock>
+                                        <Button.ToolTip>
                                             $$18397$$Food Gatherers: {numGatherers(food)}
-                                        </TextBlock.ToolTip>
-                                    </TextBlock>
-                                    <TextBlock x:Name="food_gatherpermin" FontSize="15" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
-                                        (+999)
-                                    </TextBlock>
+                                        </Button.ToolTip>
+                                    </local:Age3Button>
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_food}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
+                                        <TextBlock x:Name="minimapPanel_dpfood">
+                                        200000
+                                            <TextBlock.ToolTip>
+                                                $$18397$$Food Gatherers: {numGatherers(food)}
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                        <TextBlock x:Name="food_gatherpermin" FontSize="0" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
+                                            (+999)
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
 
-                            <!--WOOD-->
-                            <StackPanel x:Name="resourcePanel_Wood" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
-                                <!--Settler Counter-->
-                                <local:Age3Button x:Name="SettlerCountDialog_woodLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindResourceGatherers(wood)">
-                                    <TextBlock x:Name="SettlerCountDialog_wood" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-                                {numGatherers(wood)}
-                                    </TextBlock>
-                                    <Button.ToolTip>
-                                        $$18419$$Wood Gatherers: {numGatherers(wood)}
-                                    </Button.ToolTip>
-                                </local:Age3Button>
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_wood}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
-                                    <TextBlock x:Name="minimapPanel_dpwood">
-                                        {resource(wood)}
-                                        <TextBlock.ToolTip>
+                                <!--WOOD-->
+                                <StackPanel x:Name="resourcePanel_Wood" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
+                                    <!--Settler Counter-->
+                                    <local:Age3Button x:Name="SettlerCountDialog_woodLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindResourceGatherers(wood)">
+                                        <TextBlock x:Name="SettlerCountDialog_wood" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+                                    {numGatherers(wood)}
+                                        </TextBlock>
+                                        <Button.ToolTip>
                                             $$18419$$Wood Gatherers: {numGatherers(wood)}
-                                        </TextBlock.ToolTip>
-                                    </TextBlock>
-                                    <TextBlock x:Name="wood_gatherpermin" FontSize="15" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
-                                        (+999)
-                                    </TextBlock>
+                                        </Button.ToolTip>
+                                    </local:Age3Button>
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_wood}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
+                                        <TextBlock x:Name="minimapPanel_dpwood">
+                                            200000
+                                            <TextBlock.ToolTip>
+                                                $$18419$$Wood Gatherers: {numGatherers(wood)}
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                        <TextBlock x:Name="wood_gatherpermin" FontSize="0" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
+                                            (+999)
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
 
-                            <!--COIN-->
-                            <StackPanel x:Name="resourcePanel_Coin" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
-                                <!--Settler Counter-->
-                                <local:Age3Button x:Name="SettlerCountDialog_goldLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindResourceGatherers(gold)">
-                                    <TextBlock x:Name="SettlerCountDialog_gold" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-                                {numGatherers(gold)}
-                                    </TextBlock>
-                                    <Button.ToolTip>
-                                        $$18420$$Coin Gatherers: {numGatherers(gold)}
-                                    </Button.ToolTip>
-                                </local:Age3Button>
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_gold}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
-                                    <TextBlock x:Name="minimapPanel_dpgold">
-                                        {resource(gold)}
-                                        <TextBlock.ToolTip>
-                                            $$18420$$Gold Gatherers: {numGatherers(gold)}
-                                        </TextBlock.ToolTip>
-                                    </TextBlock>
-                                    <TextBlock x:Name="gold_gatherpermin" FontSize="15" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
-                                        (+999)
-                                    </TextBlock>
+                                <!--COIN-->
+                                <StackPanel x:Name="resourcePanel_Coin" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
+                                    <!--Settler Counter-->
+                                    <local:Age3Button x:Name="SettlerCountDialog_goldLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindResourceGatherers(gold)">
+                                        <TextBlock x:Name="SettlerCountDialog_gold" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+                                    {numGatherers(gold)}
+                                        </TextBlock>
+                                        <Button.ToolTip>
+                                            $$18420$$Coin Gatherers: {numGatherers(gold)}
+                                        </Button.ToolTip>
+                                    </local:Age3Button>
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_gold}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
+                                        <TextBlock x:Name="minimapPanel_dpgold">
+                                            200000
+                                            <TextBlock.ToolTip>
+                                                $$18420$$Gold Gatherers: {numGatherers(gold)}
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                        <TextBlock x:Name="gold_gatherpermin" FontSize="0" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
+                                            (+999)
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
 
-                            <!--FAME-->
-                            <StackPanel x:Name="resourcePanel_Fame" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
-                                <!--Settler Counter-->
-                                <local:Age3Button x:Name="SettlerCountDialog_fameLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindResourceGatherers(fame)">
-                                    <TextBlock x:Name="SettlerCountDialog_fame" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-                                {numGatherers(fame)}
-                                    </TextBlock>
-                                    <Button.ToolTip>
-                                        $$212005$$Fame Gatherers: {numGatherers(fame)}
-                                    </Button.ToolTip>
-                                </local:Age3Button>
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_fame}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
-                                    <TextBlock x:Name="minimapPanel_dpfame">
-                                        {resource(fame)}
-                                        <TextBlock.ToolTip>
+                                <!--FAME-->
+                                <StackPanel x:Name="resourcePanel_Fame" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
+                                    <!--Settler Counter-->
+                                    <local:Age3Button x:Name="SettlerCountDialog_fameLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindResourceGatherers(fame)">
+                                        <TextBlock x:Name="SettlerCountDialog_fame" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+                                    {numGatherers(fame)}
+                                        </TextBlock>
+                                        <Button.ToolTip>
                                             $$212005$$Fame Gatherers: {numGatherers(fame)}
-                                        </TextBlock.ToolTip>
-                                    </TextBlock>
-                                    <TextBlock x:Name="fame_gatherpermin" FontSize="15" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
+                                        </Button.ToolTip>
+                                    </local:Age3Button>
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_fame}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
+                                        <TextBlock x:Name="minimapPanel_dpfame">
+                                            20000
+                                            <TextBlock.ToolTip>
+                                                $$212005$$Fame Gatherers: {numGatherers(fame)}
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                        <TextBlock x:Name="fame_gatherpermin" FontSize="0" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
+                                            (+999)
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!--NATIVE-->
+                                <StackPanel x:Name="resourcePanel_Native" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0" Visibility="Collapsed">
+                                    <!--Settler Counter-->
+                                    <local:Age3Button x:Name="SettlerCountDialog_danceLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindDancers">
+                                        <TextBlock x:Name="SettlerCountDialog_dance" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+                                    {numDancers}
+                                        </TextBlock>
+                                        <Button.ToolTip>
+                                            $$45791$$Dancers: {numDancers}
+                                        </Button.ToolTip>
+                                    </local:Age3Button>
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_dances}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
+                                        <TextBlock x:Name="minimapPanel_dance">
+                                        {danceQuickValue}
+                                            <TextBlock.ToolTip>
+                                                {danceDescription}
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                        <TextBlock x:Name="dance_gatherpermin" FontSize="0" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
                                         (+999)
-                                    </TextBlock>
+                                        </TextBlock>
+                                    </StackPanel>
                                 </StackPanel>
-                            </StackPanel>
 
-                            <!--IDLE VILLAGER-->
-                            <StackPanel x:Name="resourcePanel_Idle" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
-                                <!--Settler Counter-->
-                                <local:Age3Button x:Name="SettlerCountDialog_idle" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" ConsoleCommand="uiFindIdleType(&quot;ValidIdleVillager&quot;)">
-                                    <TextBlock x:Name="SettlerCountDialog_idleLabel" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-                                {numIdle(AbstractVillager)}
-                                    </TextBlock>
-                                    <Button.ToolTip>
-                                        $$41608$$Idle Villagers: {numIdle(AbstractVillager)}
-                                    </Button.ToolTip>
-                                </local:Age3Button>
-                                <!--BG-->
-                                <Rectangle Width="50" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="50" Height="40" Margin="-50,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_idle}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <TextBlock x:Name="SettlerCountDialog_pop" Style="{StaticResource RegularTextBlockStyle}" TextAlignment="Left" VerticalAlignment="Center" Height="25" Width="auto" Margin="10,0,0,0" FontFamily="Trajan Pro" FontSize="22" FontWeight="Bold">
-                                {numUnits(AbstractVillager)}
-                                    <TextBlock.ToolTip>$$29017$$</TextBlock.ToolTip>
-                                </TextBlock>
-                            </StackPanel>
-
-                            <!--NATIVE-->
-                            <StackPanel x:Name="resourcePanel_Native" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0" Visibility="Collapsed">
-                                <!--Settler Counter-->
-                                <local:Age3Button x:Name="SettlerCountDialog_danceLabel" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" Visibility="Collapsed" ConsoleCommand="uiFindDancers">
-                                    <TextBlock x:Name="SettlerCountDialog_dance" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
-                                {numDancers}
-                                    </TextBlock>
-                                    <Button.ToolTip>
-                                        $$45791$$Dancers: {numDancers}
-                                    </Button.ToolTip>
-                                </local:Age3Button>
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_dances}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" MinWidth="90">
-                                    <TextBlock x:Name="minimapPanel_dance">
-                                    {danceQuickValue}
-                                        <TextBlock.ToolTip>
-                                            {danceDescription}
-                                        </TextBlock.ToolTip>
-                                    </TextBlock>
-                                    <TextBlock x:Name="dance_gatherpermin" FontSize="15" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
-                                    (+999)
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-
-                            <!--ASIAN-->
-                            <StackPanel x:Name="resourcePanel_Asian" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0" Visibility="Collapsed">
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_export}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="90">
-                                    <TextBlock x:Name="minimapPanel_trade">
-                                    {resource(trade)}
-                                        <TextBlock.ToolTip>
-                                            $$61365$$Trade Gatherers: {numGatherers(trade)}
-                                        </TextBlock.ToolTip>
-                                    </TextBlock>
-                                    <TextBlock x:Name="trade_gatherpermin" FontSize="15" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
-                                    (+999)
-                                    </TextBlock>
-                                </StackPanel>
-                            </StackPanel>
-
-                            <!--AFRICAN-->
-                            <StackPanel x:Name="resourcePanel_African" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0" Visibility="Collapsed">
-                                <!--BG-->
-                                <Rectangle Width="40" Height="45" Margin="0,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Icon-->
-                                <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
-                                    <Rectangle.Fill>
-                                        <ImageBrush ImageSource="{StaticResource resource_influence}" />
-                                    </Rectangle.Fill>
-                                </Rectangle>
-                                <!--Income-->
-                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="90">
-                                    <TextBlock x:Name="minimapPanel_influence">
+                                <!--ASIAN-->
+                                <StackPanel x:Name="resourcePanel_Asian" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0" Visibility="Collapsed">
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_export}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="90">
+                                        <TextBlock x:Name="minimapPanel_trade">
                                         {resource(trade)}
+                                            <TextBlock.ToolTip>
+                                                $$61365$$Trade Gatherers: {numGatherers(trade)}
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                        <TextBlock x:Name="trade_gatherpermin" FontSize="0" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
+                                        (+999)
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!--AFRICAN-->
+                                <StackPanel x:Name="resourcePanel_African" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0" Visibility="Collapsed">
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_influence}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="90">
+                                        <TextBlock x:Name="minimapPanel_influence">
+                                            {resource(trade)}
+                                            <TextBlock.ToolTip>
+                                                $$61365$$Trade Gatherers: {numGatherers(trade)}
+                                            </TextBlock.ToolTip>
+                                        </TextBlock>
+                                        <TextBlock x:Name="influence_gatherpermin" FontSize="0" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
+                                            (+999)
+                                        </TextBlock>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!--IDLE VILLAGER-->
+                                <StackPanel x:Name="resourcePanel_Idle" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,-5,0,0">
+                                    <!--Settler Counter-->
+                                    <local:Age3Button x:Name="SettlerCountDialog_idle" Style="{StaticResource settlerCounterButton}" Margin="0,0,0,0" Height="30" Width="40" ConsoleCommand="uiFindIdleType(&quot;ValidIdleVillager&quot;)">
+                                        <TextBlock x:Name="SettlerCountDialog_idleLabel" Style="{StaticResource RegularTextBlockStyle}" FontFamily="Trajan Pro" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center">
+                                    {numIdle(AbstractVillager)}
+                                        </TextBlock>
+                                        <Button.ToolTip>
+                                            $$41608$$Idle Villagers: {numIdle(AbstractVillager)}
+                                        </Button.ToolTip>
+                                    </local:Age3Button>
+                                    <!--BG-->
+                                    <Rectangle Width="50" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="50" Height="40" Margin="-50,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_idle}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <TextBlock x:Name="SettlerCountDialog_pop" Style="{StaticResource RegularTextBlockStyle}" TextAlignment="Left" VerticalAlignment="Center" Height="25" Width="60" Margin="10,0,0,0" FontFamily="Trajan Pro" FontSize="22" FontWeight="Bold">
+                                    100
+                                        <TextBlock.ToolTip>$$29017$$</TextBlock.ToolTip>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <!--ECONOMY MODE: MILITARY POP-->
+                                <StackPanel x:Name="resourcePanel_MilPops" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,0" Visibility="Collapsed">
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="/resources/images/hud/stat_icon_infantry.png"/>
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+
+                                    <!--Income-->
+                                    <TextBlock x:Name="millitaryPop_text" MinWidth="90">
+                                            {totalMilPop}/{milpopcap}
                                         <TextBlock.ToolTip>
-                                            $$61365$$Trade Gatherers: {numGatherers(trade)}
+                                            $$55503$$Your current military population is {totalMilPop} / You can support a total population of {milpopcap}.
                                         </TextBlock.ToolTip>
                                     </TextBlock>
-                                    <TextBlock x:Name="influence_gatherpermin" FontSize="15" Width="auto" Margin="0" VerticalAlignment="Top" Visibility="Collapsed">
-                                        (+999)
+                                </StackPanel>
+
+                                <!--POPS-->
+                                <StackPanel x:Name="resourcePanel_Pops" Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-5,0,0">
+                                    <!--BG-->
+                                    <Rectangle Width="40" Height="45" Margin="0,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource uiresourcesicon_bg}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Icon-->
+                                    <Rectangle Width="40" Height="40" Margin="-40,0,0,0">
+                                        <Rectangle.Fill>
+                                            <ImageBrush ImageSource="{StaticResource resource_pop}" />
+                                        </Rectangle.Fill>
+                                    </Rectangle>
+                                    <!--Income-->
+                                    <TextBlock x:Name="minimapPanel_dptotalPopLeft" MinWidth="90">
+                                            200/200
+                                        <TextBlock.ToolTip>
+                                            $$32714$$Your current population is {totalpop} / You can support a total population of {popcap}.
+                                        </TextBlock.ToolTip>
                                     </TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </Grid>
-
-                <!--HC BUTTON-->
-                <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-10,-10,0,0">
-                    <!--Flag-->
-                    <local:Age3Button x:Name="uimain_homeCityToggle" Style="{StaticResource HomeCityHUDButton}" Focusable="False" ConsoleCommand="toggleHomeCityView()">
-                        <local:Age3Button.ToolTip>
-                            $$32709$$
-                        </local:Age3Button.ToolTip>
-                    </local:Age3Button>
+                    </Grid>
                 </Grid>
 
                 <Grid x:Name="HiddenByExtendedMinimap7" Grid.Row="3" Grid.Column="2"
@@ -4480,7 +4493,7 @@
                 </Grid>
 
                 <!--MENU DROPDOWN (Turn on when Menu Button is selected)-->
-                <Grid x:Name="mainGameMenu" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Right"
+                <Grid x:Name="mainGameMenu" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left"
                     VerticalAlignment="Top" Width="260" Margin="0,-4,25,0" Visibility="Collapsed">
                     <ContentControl Template="{StaticResource QueueBG}" Margin="-5,-10,-5,-5" />
                     <StackPanel>
@@ -4586,8 +4599,8 @@
                 </Grid>
 
                 <!--MENU PANEL-->
-                <Grid x:Name="menuPanel" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="3"
-                    HorizontalAlignment="Right"
+                <Grid x:Name="menuPanel" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="3"
+                    HorizontalAlignment="Left"
                     Width="{Binding ElementName=mainmenuPanel, Path=ActualWidth}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="15" />
@@ -4596,45 +4609,24 @@
                     </Grid.ColumnDefinitions>
 
                     <Control Grid.ColumnSpan="3" Style="{StaticResource Ingame_PanelBGStyle}"
-                        Margin="10,-15,-10,-45" />
+                        Margin="-10,-15,20,-45" />
 
                     <StackPanel x:Name="mainmenuPanel" Grid.Column="1" Orientation="Horizontal"
-                        HorizontalAlignment="Right" VerticalAlignment="Center">
-                        <local:Age3Button x:Name="AgeUpButton" Style="{StaticResource AgeUpButton}"
-                            Focusable="False" HorizontalAlignment="Right" Margin="50,0,-50,0"
-                            ToolTip="{Binding AgeUpTooltip}" />
+                        HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <!--Menu Button-->
+                        <local:Age3Button x:Name="minimapPanel_menubutton"
+                            Style="{StaticResource HUDButton}" Focusable="False" Height="35"
+                            Width="70" HorizontalAlignment="Center"
+                            ConsoleCommand="toggleGameMenu()" Margin="10,0,10,0">
+                            <Image Source="{StaticResource hud_icon_menu}" Width="60" Height="30"
+                                HorizontalAlignment="Center" VerticalAlignment="Center"
+                                Margin="0,0,0,0" />
 
-                        <!--Age Container-->
-                        <Grid Margin="50,1,0,2" Height="44">
-                            <Image x:Name="uimain_AgeAdvBG" HorizontalAlignment="Center" Width="350"
-                                VerticalAlignment="Center" Stretch="Fill"
-                                Source="/resources/images/hud/progressbg.png" />
+                            <Button.ToolTip>
+                                $$18410$$Click on this icon to see the in-game menu.
+                            </Button.ToolTip>
+                        </local:Age3Button>
 
-                            <ProgressBar x:Name="uimain_AgeAdvFG" HorizontalAlignment="Center"
-                                Width="340" Height="45" Margin="0,1,0,0" VerticalAlignment="Center"
-                                Value="0" Style="{StaticResource PanelFGProgression}"
-                                Visibility="Visible" />
-
-                            <StackPanel Width="340" Orientation="Vertical" Visibility="Visible"
-                                VerticalAlignment="Center">
-                                <!--Age Title-->
-                                <TextBlock x:Name="titleBarPanel_text2"
-                                    Style="{StaticResource RegularTextBlockStyle}"
-                                    VerticalAlignment="Center" HorizontalAlignment="Center"
-                                    Margin="10,1,10,0" FontFamily="Trajan Pro" FontWeight="Bold"
-                                    FontSize="18" TextAlignment="Center">
-                                    {playerAge}
-                                </TextBlock>
-                                <DockPanel x:Name="timePanel" HorizontalAlignment="Right"
-                                    Height="20" Width="340" Margin="0,-1,0,0" Visibility="Collapsed">
-                                    <TextBlock x:Name="timeDisplay" HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"
-                                        Style="{StaticResource RegularTextBlockStyle}" Opacity="0.8">
-                                        00:00:10:21 {Moderate}
-                                    </TextBlock>
-                                </DockPanel>
-                            </StackPanel>
-                        </Grid>
 
                         <!--Game Summary Button-->
                         <local:Age3Button x:Name="GameSummaryButton" Height="35" Width="70"
@@ -4674,26 +4666,48 @@
                         <!--Diplomacy Button-->
                         <local:Age3Button x:Name="InGameMenu_SendResource"
                             Style="{StaticResource diplomacyToggleButton}" Focusable="False"
-                            Height="35" Width="70" HorizontalAlignment="Center" Margin="10,0,0,0"
+                            Height="35" Width="70" HorizontalAlignment="Center" Margin="10,0,10,0"
                             Visibility="Visible">
                             <Button.ToolTip>
                                 $$71259$$Open diplomacy settings.
                             </Button.ToolTip>
                         </local:Age3Button>
 
-                        <!--Menu Button-->
-                        <local:Age3Button x:Name="minimapPanel_menubutton"
-                            Style="{StaticResource HUDButton}" Focusable="False" Height="35"
-                            Width="70" HorizontalAlignment="Center"
-                            ConsoleCommand="toggleGameMenu()" Margin="10,0,10,0">
-                            <Image Source="{StaticResource hud_icon_menu}" Width="60" Height="30"
-                                HorizontalAlignment="Center" VerticalAlignment="Center"
-                                Margin="0,0,0,0" />
+                        <!--Age Container-->
+                        <Grid Margin="0,1,50,2" Height="44">
+                            <Image x:Name="uimain_AgeAdvBG" HorizontalAlignment="Center" Width="350"
+                                VerticalAlignment="Center" Stretch="Fill"
+                                Source="/resources/images/hud/progressbg.png" />
 
-                            <Button.ToolTip>
-                                $$18410$$Click on this icon to see the in-game menu.
-                            </Button.ToolTip>
-                        </local:Age3Button>
+                            <ProgressBar x:Name="uimain_AgeAdvFG" HorizontalAlignment="Center"
+                                Width="340" Height="45" Margin="0,1,0,0" VerticalAlignment="Center"
+                                Value="0" Style="{StaticResource PanelFGProgression}"
+                                Visibility="Visible" />
+
+                            <StackPanel Width="340" Orientation="Vertical" Visibility="Visible"
+                                VerticalAlignment="Center">
+                                <!--Age Title-->
+                                <TextBlock x:Name="titleBarPanel_text2"
+                                    Style="{StaticResource RegularTextBlockStyle}"
+                                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                                    Margin="10,1,10,0" FontFamily="Trajan Pro" FontWeight="Bold"
+                                    FontSize="18" TextAlignment="Center">
+                                    {playerAge}
+                                </TextBlock>
+                                <DockPanel x:Name="timePanel" HorizontalAlignment="Right"
+                                    Height="20" Width="340" Margin="0,-1,0,0" Visibility="Collapsed">
+                                    <TextBlock x:Name="timeDisplay" HorizontalAlignment="Center"
+                                        VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"
+                                        Style="{StaticResource RegularTextBlockStyle}" Opacity="0.8">
+                                        00:00:10:21 {Moderate}
+                                    </TextBlock>
+                                </DockPanel>
+                            </StackPanel>
+                        </Grid>
+
+                        <local:Age3Button x:Name="AgeUpButton" Style="{StaticResource AgeUpButton}"
+                            Focusable="False" HorizontalAlignment="Left" Margin="-50,0,50,0"
+                            ToolTip="{Binding AgeUpTooltip}" />
                     </StackPanel>
                 </Grid>
 
