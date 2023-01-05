@@ -1631,6 +1631,8 @@
             <Setter Property="FontFamily" Value="Trajan Pro" />
             <Setter Property="Focusable" Value="False" />
             <Setter Property="ClickMode" Value="Press" />
+            <Setter Property="Margin" Value="2,0,2,0" />
+            <Setter Property="IsHitTestVisible" Value="False" />
 
             <Setter Property="RenderTransformOrigin" Value="0.5, 0.5" />
             <Setter Property="RenderTransform">
@@ -1644,48 +1646,25 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Grid Height="90" Width="70">
-                            <Rectangle Height="80" Width="70" RadiusX="7" RadiusY="7" Fill="Black" />
-                            <Rectangle x:Name="ButtonBackground" Height="77" Width="68" RadiusX="4"
+                        <Grid Height="50" Width="50">
+                            <Rectangle x:Name="ButtonBackground" Height="50" Width="50" RadiusX="4"
                                 RadiusY="4" Fill="{TemplateBinding Background}"
                                 Stroke="{StaticResource ButtonStrokeGradient}" StrokeThickness="2" />
                             <Grid>
                                 <Image x:Name="banner_icon" Height="50" Width="50"
                                     HorizontalAlignment="Center" VerticalAlignment="Bottom"
-                                    Margin="0,19,0,15" Source="{Binding Icon}"></Image>
+                                    Margin="0,1,0,1" Source="{Binding Icon}"></Image>
                                 <TextBlock x:Name="UnitSelection_Text" HorizontalAlignment="Right"
                                     VerticalAlignment="Bottom" FontSize="16" FontWeight="Bold"
-                                    Foreground="White" Margin="0,0,12,10"
+                                    Foreground="White" Margin="0,0,6,1"
                                     Text="{TemplateBinding Content}" />
                             </Grid>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsPressed" Value="True">
                                 <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                                Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
-                                                To="0.95" Duration="0:0:.05" />
-                                            <DoubleAnimation
-                                                Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
-                                                To="0.95" Duration="0:0:.05" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
                                     <SoundPlayerAction Source="/resources/audio/smallbutton.wav" />
                                 </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation
-                                                Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleX)"
-                                                To="1" Duration="0:0:.05" />
-                                            <DoubleAnimation
-                                                Storyboard.TargetProperty="RenderTransform.(ScaleTransform.ScaleY)"
-                                                To="1" Duration="0:0:.05" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
                                 <Setter Property="Fill" TargetName="ButtonBackground">
                                     <Setter.Value>
                                         <SolidColorBrush Color="#9d712a" />
@@ -1695,34 +1674,8 @@
 
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ThicknessAnimationUsingKeyFrames
-                                                Storyboard.TargetProperty="Margin"
-                                                BeginTime="00:00:00">
-                                                <SplineThicknessKeyFrame KeyTime="00:00:00"
-                                                    Value="5,-15,0,0" />
-                                                <SplineThicknessKeyFrame KeyTime="0:0:.05"
-                                                    Value="5,-28,0,0" />
-                                            </ThicknessAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
                                     <SoundPlayerAction Source="/resources/audio/mouseover_00.wav" />
                                 </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <ThicknessAnimationUsingKeyFrames
-                                                Storyboard.TargetProperty="Margin"
-                                                BeginTime="00:00:00">
-                                                <SplineThicknessKeyFrame KeyTime="00:00:00"
-                                                    Value="5,-28,0,0" />
-                                                <SplineThicknessKeyFrame KeyTime="0:0:.05"
-                                                    Value="5,-15,0,0" />
-                                            </ThicknessAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
                                 <Setter Property="Fill" TargetName="ButtonBackground">
                                     <Setter.Value>
                                         <SolidColorBrush Color="#5d451e" />
@@ -3066,32 +3019,20 @@
                 </Grid.ColumnDefinitions>
 
                 <!--ARMY BANNERS-->
-                <StackPanel x:Name="armyBanner" Grid.Row="0" Grid.RowSpan="3" Grid.Column="1"
-                    Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Left"
-                    VerticalAlignment="Top" Height="100" Margin="0,-15,0,0" Visibility="Visible">
+                <StackPanel x:Name="armyBanner" Grid.Row="0" Grid.RowSpan="5" Grid.Column="0"
+                    Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Right"
+                    VerticalAlignment="Bottom" Height="100" Margin="0,0,560,270" Visibility="Visible">
                     <StackPanel.Resources>
                         <Style TargetType="local:Age3Button"
                             BasedOn="{StaticResource HUDBannerButton}">
-                            <Setter Property="Focusable" Value="False" />
-                            <Setter Property="Margin" Value="5,-15,0,0" />
                         </Style>
                     </StackPanel.Resources>
 
-                    <local:Age3Button x:Name="idleVillagerBanner"
-                        ConsoleCommand="uiFindIdleType(&quot;ValidIdleVillager&quot;)" Content=".">
-                        <local:Age3Button.ToolTip>
-                            $$41608$$Idle Villagers: {numIdle(AbstractVillager)}
-                        </local:Age3Button.ToolTip>
-                    </local:Age3Button>
-                    <local:Age3Button x:Name="armyBanner_unfurled0" Content="1" />
-                    <local:Age3Button x:Name="armyBanner_unfurled1" Content="2" />
-                    <local:Age3Button x:Name="armyBanner_unfurled2" Content="3" />
-                    <local:Age3Button x:Name="armyBanner_unfurled3" Content="4" />
-                    <local:Age3Button x:Name="armyBanner_unfurled4" Content="5" />
-                    <local:Age3Button x:Name="armyBanner_unfurled5" Content="6" />
-                    <local:Age3Button x:Name="armyBanner_unfurled6" Content="7" />
-                    <local:Age3Button x:Name="armyBanner_unfurled7" Content="8" />
-                    <local:Age3Button x:Name="armyBanner_unfurled8" Content="9" />
+                    <local:Age3Button x:Name="armyBanner_unfurled0" Content="1" IsEnabled="False"/>
+                    <local:Age3Button x:Name="armyBanner_unfurled1" Content="2" IsEnabled="False"/>
+                    <local:Age3Button x:Name="armyBanner_unfurled2" Content="3" IsEnabled="False"/>
+                    <local:Age3Button x:Name="armyBanner_unfurled3" Content="4" IsEnabled="False"/>
+                    <local:Age3Button x:Name="armyBanner_unfurled4" Content="5" IsEnabled="False"/>
                 </StackPanel>
 
                 <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="3" HorizontalAlignment="Right">
@@ -4708,14 +4649,31 @@
                     Height="auto" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                     Margin="0,0,0,0">
 
+                    <!--Idle vills-->
+                    <Grid Height="90" Width="80" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-20,-45,0,0">
+                        <Grid.Resources>
+                            <Style TargetType="local:Age3Button"
+                            BasedOn="{StaticResource HUDBannerButton}">
+                            <Setter Property="IsHitTestVisible" Value="True" />
+                            </Style>
+                        </Grid.Resources>
+                        
+                        <local:Age3Button x:Name="idleVillagerBanner"
+                        ConsoleCommand="uiFindIdleType(&quot;ValidIdleVillager&quot;)">
+                            <local:Age3Button.ToolTip>
+                                $$41608$$Idle Villagers: {numIdle(AbstractVillager)}
+                            </local:Age3Button.ToolTip>
+                        </local:Age3Button>
+                    </Grid>
+
                     <!--Time-->
-                    <Grid Width="auto" Height="20" Margin="0,-30,0,0" VerticalAlignment="Top" HorizontalAlignment="Right"  MaxWidth="240">
+                    <Grid Width="auto" Height="20" Margin="0,-30,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"  MaxWidth="250">
 
                         <Rectangle Fill="Black" Opacity="0.5" RadiusX="8" RadiusY="8" Margin="-2,-2,-2,0"/>
 
                         <DockPanel x:Name="timePanel" HorizontalAlignment="Center" Visibility="Visible">
                             <TextBlock x:Name="timeDisplay" HorizontalAlignment="Center"
-                                        VerticalAlignment="Center" FontSize="18" Margin="0,0,0,0"
+                                        VerticalAlignment="Center" FontSize="16" Margin="0,0,0,0"
                                         Style="{StaticResource RegularTextBlockStyle}" Opacity="0.8">
                                         00:00:10:21 {Moderate}
                             </TextBlock>
@@ -4724,7 +4682,7 @@
 
                     <!--Flare Button-->
                     <Grid x:Name="HiddenByExtendedMinimap1" Height="60" Width="60"
-                        HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,5">
+                        HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,0,5"  Visibility="Collapsed">
 
                         <local:Age3Button x:Name="minimapPanel_flareButton"
                             Style="{StaticResource HUDButtonCompass}"
@@ -4749,7 +4707,7 @@
                     </Grid>
 
                     <Grid x:Name="HiddenByExtendedMinimap3" Height="60" Width="60"
-                        HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,-25,0,0">
+                        HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,-25,0,0" Visibility="Collapsed">
                         <!--Explorer Button-->
                         <!--NOTE: This button has changed from Player Summary to Explorer-->
                         <local:Age3Button x:Name="minimapPanel_explorerButton"
@@ -4764,11 +4722,11 @@
                         </local:Age3Button>
                     </Grid>
                     <Grid Height="60" Width="60" HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom" Margin="0,0,0,5">
+                        VerticalAlignment="Bottom" Margin="0,0,0,5"  Visibility="Collapsed">
                         <local:Age3Button x:Name="minimapPanel_closeExtendedMinimap"
                             Style="{StaticResource HUDButtonCompass}" VerticalAlignment="Bottom"
                             HorizontalAlignment="Left" ConsoleCommand="toggleExtendedMinimap"
-                            IsEnabled="true" Visibility="Collapsed">
+                            IsEnabled="true">
                             <Button.Background>
                                 <ImageBrush ImageSource="{StaticResource minimap_expand_icon}" />
                             </Button.Background>
@@ -4777,11 +4735,11 @@
                         </local:Age3Button>
                     </Grid>
 
-                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-7,30,0,0">
+                    <Grid HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,30,-7,0">
                         <local:Age3Button x:Name="minimapPanel_openExtendedMinimap"
                             Style="{StaticResource MiniHUDButtonCompass}" VerticalAlignment="Bottom"
                             HorizontalAlignment="Left" ConsoleCommand="toggleExtendedMinimap"
-                            IsEnabled="true">
+                            IsEnabled="true" Visibility="Collapsed">
                             <Button.Background>
                                 <ImageBrush ImageSource="{StaticResource minimap_expand_icon}" />
                             </Button.Background>
