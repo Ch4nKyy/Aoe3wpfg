@@ -12,27 +12,35 @@ The HUD is based on the Classic HUD (uimainnew_legacy.xaml) with some elements f
 HUD (uimainnew.xaml). However, for the mod, uimainnew.xaml MUST be used, because otherwise some
 UI images are not loaded by the game!
 
-## How to setup
+## How to develop
+
+Visual Studios XAML designer can help you, but it also requires some trial and error ingame.
+
+### Setup
 
 * Clone project
-* Use ResourceManager (0.5.0) to extract all bars inside Age3/Game/UI and put the output into
+* Use ResourceManager (0.5.0) to extract all .bars inside Age3/Game/UI and put the output into
 aoe3wpfg/resources.
-* Build the solution with Visual Studio
-* Open xaml in designer view
+* Build the solution with Visual Studio (requires WPF Desktop Development)
+* Ingame use the Definitive UI!
 
-## How to update
+### Routine
+
+* Open xaml in designer view
+* Do some changes
+* Copy uimainnew.xaml to
+  ```C:\Users\user\Games\Age of Empires 3 DE\playerID\mods\local\SC2UI\data\wpfg\uimainnew.xaml```
+* The game reloads the UI, when you restart the match.
+
+### When Age3 gets an update
 
 Age3 DE might get updates that add UI features that will be missing in the UI mod.
 
-* First, compare the new official UI and the modded UI by:
-  * Extracting the new xamls from Game/UI/UI.bar
-  * Formating both files to match indents, so the diff is minimal
-  * Compare diff
-  * Please note that even when nothing was added, there will be a diff, because of the UI elements
-    I moved around
-* Add missing stuff
-* Overwrite
-C:\Users\user\Games\Age of Empires 3 DE\playerID\mods\local\SC2UI\data\wpfg\uimainnew.xaml
+* Extract the current xamls from Game/UI/UI.bar
+* Compare the diff between the extracted uimainnew.xaml and aoe3wpfg/uimainnew_orig.xaml
+  * (Formatting both files to match indents can help minimizing the diff)
+* Add new features to aoe3wpfg/uimainnew.xaml
+* Copy xaml like usual to mod folder
 
 ## Troubleshooting
 
